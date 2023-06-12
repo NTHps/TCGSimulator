@@ -1,4 +1,5 @@
 ﻿using CardCore.Base.Cards;
+using CardCore.Interfaces;
 
 namespace CardCore.Base
 {
@@ -14,15 +15,17 @@ namespace CardCore.Base
         public List<Card> Graveyard { get; set; } = new List<Card>();
         public List<MonsterCard> ExtraDeck { get; set; } = new List<MonsterCard>();
         public Field Field { get; set; }
+        public IUserInteraction UserInteraction;
 
         #endregion Properties
 
         #region - - - - - - Constructor - - - - - -
 
-        public Player(string name, EventBus eventBus)
+        public Player(string name, EventBus eventBus, IUserInteraction userInteraction)
         {
             Name = name;
             Field = new(eventBus);
+            UserInteraction = userInteraction;
         }
 
         #endregion Constructor

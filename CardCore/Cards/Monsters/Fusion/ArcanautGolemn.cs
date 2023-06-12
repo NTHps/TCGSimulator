@@ -6,14 +6,14 @@ using CardCore.Enums;
 namespace CardCore.Cards.Monsters.Fusion
 {
 
-    public class RunickDog : MonsterCard
+    public class ArcanautGolemn : MonsterCard
     {
 
         #region - - - - - - Constructor - - - - - -
 
-        public RunickDog()
+        public ArcanautGolemn()
         {
-            Name = "Runick Dog";
+            Name = "Arcanaut's Golemn";
             Level = 5;
             ExtraDeckType = ExtraDeckTypeEnum.Fusion;
             AttackPoints = 0;
@@ -22,7 +22,6 @@ namespace CardCore.Cards.Monsters.Fusion
 
         #endregion Constructor
 
-
         #region - - - - - - Methods - - - - - -
 
         public override void HandleEvent(EventTypeEnum eventType, EventArgs eventArgs, Player player, Field field, EventBus eventBus)
@@ -30,12 +29,12 @@ namespace CardCore.Cards.Monsters.Fusion
             if (eventType == EventTypeEnum.SpecialSummon)
             {
                 var args = eventArgs as SpecialSummonedEventArgs;
-                if (args != null && args.SummonedMonster.Name.Contains("Runick") && args.SummonedMonster != this && field.MonsterCardZones.Any(zone => zone.OccupyingCard == this))
+                if (args != null && args.SummonedMonster.Name.Contains("Arcanaut") && args.SummonedMonster != this && field.MonsterCardZones.Any(zone => zone.OccupyingCard == this))
                 {
-                    Console.WriteLine("Adding Runick Runick Dog effect to chain");
+                    Console.WriteLine($"Adding {Name} effect to chain");
                     eventBus.AddToChain(this, () =>
                     {
-                        Console.WriteLine("Resolving runick dog");
+                        Console.WriteLine($"Resolving {Name}");
                         player.DrawCard();
                     });
                 }

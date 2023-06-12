@@ -1,5 +1,6 @@
 ﻿using CardCore.Cards.Monsters.Fusion;
 using CardCore.Cards.Spells;
+using CardCore.Interfaces;
 
 namespace CardCore.Base
 {
@@ -15,18 +16,16 @@ namespace CardCore.Base
 
         #endregion Properties
 
-
         #region - - - - - - Constructor - - - - - -
 
-        public Game()
+        public Game(IUserInteraction userInteraction)
         {
             EventBus = new EventBus();
-            Player1 = new Player("Player 1", EventBus);
-            Player2 = new Player("Player 2", EventBus);
+            Player1 = new Player("Player 1", EventBus, userInteraction);
+            Player2 = new Player("Player 2", EventBus, userInteraction);
         }
 
         #endregion Constructor
-
 
         #region - - - - - - Methods - - - - - -
 
@@ -36,20 +35,20 @@ namespace CardCore.Base
         /// </summary>
         public void Start()
         {
-            // You can include initial setup logic here, like shuffling decks, drawing starting hands, etc.
+            // Setup Player 1
 
-            var _RunickHugin = new RunickHugin();
-            var _RunickCalling = new RunickCalling();
+            Player1.ExtraDeck.Add(new ArcanautGolemn());
+            Player1.ExtraDeck.Add(new ArcanautGolemn());
+            Player1.ExtraDeck.Add(new ArcanautGolemn());
+            Player1.ExtraDeck.Add(new ArcanautGoddess());
+            Player1.ExtraDeck.Add(new ArcanautGoddess());
+            Player1.ExtraDeck.Add(new ArcanautGoddess());
 
-            Player1.ExtraDeck.Add(new RunickDog());
-            Player1.ExtraDeck.Add(_RunickHugin);
-            Player1.Hand.Add(_RunickCalling);
-            Player1.Hand.Add(new RunickFountain());
+            Player1.Hand.Add(new ArcanautAstralCompass());
+            Player1.Hand.Add(new ArcanautNewWorld());
 
-            Player1.Deck.Add(new RunickFountain());
-            Player1.Deck.Add(new RunickFountain());
-            Player1.Deck.Add(new RunickFountain());
-            Player1.Deck.Add(new RunickFountain());
+            Player1.Deck.Add(new ArcanautNewWorld());
+            Player1.Deck.Add(new ArcanautNewWorld());
         }
 
         /// <summary>
@@ -62,7 +61,10 @@ namespace CardCore.Base
         /// For testing purposes, active this spell card to test game logic
         /// </summary>
         public void ActivateRunickCalling()
-            => Player1.Field.ActivateSpellCard(new RunickCalling(), Player1);
+            => Player1.Field.ActivateSpellCard(new ArcanautAstralCompass(), Player1);
+
+        public string GetCurrentChainLink()
+            => this.EventBus.GetChainLink();
 
         #endregion Methods
 

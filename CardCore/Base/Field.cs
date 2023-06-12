@@ -98,6 +98,19 @@ namespace CardCore.Base
             });
         }
 
+        public List<int> GetEmptyMonsterZones()
+        {
+            var _EmptyMonsterZones = new List<int>();
+            for (int i = 0; i < MonsterCardZones.Length; i++)
+            {
+                if (MonsterCardZones[i].OccupyingCard == null)
+                {
+                    _EmptyMonsterZones.Add(i);
+                }
+            }
+            return _EmptyMonsterZones;
+        }
+
         #endregion Methods
 
     }

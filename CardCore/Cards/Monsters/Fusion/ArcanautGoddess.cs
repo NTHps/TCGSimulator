@@ -6,14 +6,14 @@ using CardCore.Enums;
 namespace CardCore.Cards.Monsters.Fusion
 {
 
-    public class RunickHugin : MonsterCard
+    public class ArcanautGoddess : MonsterCard
     {
 
         #region - - - - - - Constructor - - - - - -
 
-        public RunickHugin()
+        public ArcanautGoddess()
         {
-            Name = "Runick Hugin";
+            Name = "Arcanaut's Goddess";
             Level = 2;
             ExtraDeckType = ExtraDeckTypeEnum.Fusion;
             AttackPoints = 0;
@@ -34,18 +34,18 @@ namespace CardCore.Cards.Monsters.Fusion
                     // Check if the player has at least one card in hand to discard.
                     if (player.Hand.Count > 0)
                     {
-                        Console.WriteLine("Adding Runick Hugin effect to chain");
+                        Console.WriteLine($"Adding {Name} effect to chain");
                         // Trigger effect
                         eventBus.AddToChain(this, () =>
                         {
-                            Console.WriteLine("Resolving Runick Hugin");
+                            Console.WriteLine($"Resolving {Name}");
                             // Discard the first card in hand.
                             var discardedCard = player.Hand[0];
                             player.Hand.RemoveAt(0);
                             player.Graveyard.Add(discardedCard);
 
                             // Search for 'Runick Fountain' in the deck.
-                            var runickFountain = player.Deck.FirstOrDefault(card => card.Name == "Runick Fountain");
+                            var runickFountain = player.Deck.FirstOrDefault(card => card.Name == "Arcanaut New World");
                             if (runickFountain != null)
                             {
                                 // Remove from deck and add to hand.

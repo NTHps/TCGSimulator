@@ -1,4 +1,5 @@
 ﻿using CardCore.Enums;
+using System.Text;
 
 namespace CardCore.Base
 {
@@ -17,6 +18,11 @@ namespace CardCore.Base
 
         #region - - - - - - Methods - - - - - -
 
+        /// <summary>
+        /// Add a an action to the currently building chain link
+        /// </summary>
+        /// <param name="card"></param>
+        /// <param name="action"></param>
         public void AddToChain(Card card, Action action)
         {
             if (m_IsResolvingChain)
@@ -25,6 +31,14 @@ namespace CardCore.Base
                 return;
             }
             m_ChainLinks.Push(new ChainLink { Card = card, Action = action });
+        }
+
+        public string GetChainLink()
+        {
+            StringBuilder _StringBuilder = new();
+            foreach (var (_ChainLink, _Index) in this.m_ChainLinks.Select((value, index) => (value, index)))
+                _StringBuilder.AppendLine($"Chain Link {_Index + 1}: {_ChainLink.Card.Name}");
+            return _StringBuilder.ToString();
         }
 
         /// <summary>

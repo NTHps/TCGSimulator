@@ -5,14 +5,14 @@ using CardCore.Enums;
 namespace CardCore.Cards.Spells
 {
 
-    public class RunickFountain : SpellCard
+    public class ArcanautNewWorld : SpellCard
     {
 
         #region - - - - - - Constructor - - - - - -
 
-        public RunickFountain()
+        public ArcanautNewWorld()
         {
-            Name = "Runick Fountain";
+            Name = "Arcanaut New World";
             SpellType = SpellTypeEnum.Field;
         }
 
