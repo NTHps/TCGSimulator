@@ -36,8 +36,8 @@ namespace CardCore.Base
         public string GetChainLink()
         {
             StringBuilder _StringBuilder = new();
-            foreach (var (_ChainLink, _Index) in this.m_ChainLinks.Select((value, index) => (value, index)))
-                _StringBuilder.AppendLine($"Chain Link {_Index + 1}: {_ChainLink.Card.Name}");
+            foreach (var (_ChainLink, _Index) in this.m_ChainLinks.Select((value, index) => (value, index)).OrderByDescending(c => c.index))
+                _StringBuilder.AppendLine($"Chain Link {this.m_ChainLinks.Count() - (_Index + 1) + 1}: {_ChainLink.Card.Name}");
             return _StringBuilder.ToString();
         }
 
