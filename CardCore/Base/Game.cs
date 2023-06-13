@@ -1,5 +1,6 @@
 ﻿using CardCore.Cards.Monsters.Fusion;
 using CardCore.Cards.Spells;
+using CardCore.Enums;
 using CardCore.Interfaces;
 
 namespace CardCore.Base
@@ -37,18 +38,18 @@ namespace CardCore.Base
         {
             // Setup Player 1
 
-            Player1.ExtraDeck.Add(new ArcanautGolemn());
-            Player1.ExtraDeck.Add(new ArcanautGolemn());
-            Player1.ExtraDeck.Add(new ArcanautGolemn());
-            Player1.ExtraDeck.Add(new ArcanautGoddess());
-            Player1.ExtraDeck.Add(new ArcanautGoddess());
-            Player1.ExtraDeck.Add(new ArcanautGoddess());
+            Player1.ExtraDeck.Add(new ArcanautGolemn() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
+            Player1.ExtraDeck.Add(new ArcanautGolemn() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
+            Player1.ExtraDeck.Add(new ArcanautGolemn() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
+            Player1.ExtraDeck.Add(new ArcanautGoddess() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
+            Player1.ExtraDeck.Add(new ArcanautGoddess() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
+            Player1.ExtraDeck.Add(new ArcanautGoddess() { Owner = Player1, Position = CardPositionEnum.ExtraDeck });
 
-            Player1.Hand.Add(new ArcanautAstralCompass());
-            Player1.Hand.Add(new ArcanautNewWorld());
+            Player1.Hand.Add(new ArcanautAstralCompass() { Owner = Player1, Position = CardPositionEnum.Hand });
+            Player1.Hand.Add(new ArcanautNewWorld() { Owner = Player1, Position = CardPositionEnum.Hand });
 
-            Player1.Deck.Add(new ArcanautNewWorld());
-            Player1.Deck.Add(new ArcanautNewWorld());
+            Player1.Deck.Add(new ArcanautNewWorld() { Owner = Player1, Position = CardPositionEnum.Deck });
+            Player1.Deck.Add(new ArcanautNewWorld() { Owner = Player1, Position = CardPositionEnum.Deck });
         }
 
         /// <summary>

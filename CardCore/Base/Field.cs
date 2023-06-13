@@ -60,25 +60,35 @@ namespace CardCore.Base
                 throw new ArgumentException("The selected monster zone is already occupied.");
             }
 
+            var _Args = new SpecialSummonedEventArgs { Player = player, SummonedMonster = card, From = card.Position };
+
             // Remove card from original position
-            // TO DO: Create more generic means of removing and placing cards
-            if (card.ExtraDeckType.HasValue)
-                player.ExtraDeck.Remove(card);
-            else if (player.Hand.Any(c => c.ID == card.ID))
-                player.Hand.Remove(card);
-            else if (player.Graveyard.Any(c => c.ID == card.ID))
-                player.Graveyard.Remove(card);
+            switch (card.Position)
+            {
+                case CardPositionEnum.ExtraDeck:
+                    player.ExtraDeck.Remove(card);
+                    break;
+                case CardPositionEnum.Hand:
+                    player.Hand.Remove(card);
+                    break;
+                case CardPositionEnum.Graveyard:
+                    player.Graveyard.Remove(card);
+                    break;
+                default:
+                    break;
+            }
 
             // Place the card in the chosen monster zone
             Console.WriteLine("Special summoning: " + card.Name);
             this.MonsterCardZones[position].OccupyingCard = card;
+            card.Position = CardPositionEnum.Field;
 
             // Register
             // TO DO: Might just register every card in the game start. This way cards in the hand or graveyard can have effects triggered. 
             m_EventBus.Register(EventTypeEnum.SpecialSummon, (sender, eventArgs) => card.HandleEvent(EventTypeEnum.SpecialSummon, eventArgs, player, this, m_EventBus));
 
             // Raise event to indicate a monster has been special summoned.
-            m_EventBus.RaiseEvent(EventTypeEnum.SpecialSummon, this, new SpecialSummonedEventArgs { Player = player, SummonedMonster = card });
+            m_EventBus.RaiseEvent(EventTypeEnum.SpecialSummon, this, _Args);
         }
 
         public void ActivateSpellCard(SpellCard spellCard, Player player)

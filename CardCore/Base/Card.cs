@@ -9,6 +9,7 @@ public abstract class Card
     public Guid ID { get; set; } = Guid.NewGuid();
     public string Name { get; set; }
     public Player Owner { get; set; }
+    public CardPositionEnum Position { get; set; }
 
     #endregion Properties
 
